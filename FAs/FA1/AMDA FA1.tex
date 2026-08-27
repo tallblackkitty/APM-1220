@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[margin=1in]{geometry}
+
+\title{APM1220: Applied Multivariate Data Analysis \\ FA 1} 
+\author{Andrei Ablian 2022063851}
+\date{Aug 27, 2026}
+
+\begin{document}
+\maketitle
+
+\section*{Problem 2.2} 
+Given the matrices 
+$A = \begin{bmatrix} -1 & 3 \\ 4 & 2 \end{bmatrix}$, 
+$B = \begin{bmatrix} 4 & -3 \\ 1 & -2 \\ -2 & 0 \end{bmatrix}$, and 
+$C = \begin{bmatrix} 5 \\ -4 \\ 2 \end{bmatrix}$, perform the indicated operations: 
+
+\paragraph{(a) $5A$} 
+\[
+5A = 5 \begin{bmatrix} -1 & 3 \\ 4 & 2 \end{bmatrix} = \begin{bmatrix} -5 & 15 \\ 20 & 10 \end{bmatrix}
+\] 
+
+\paragraph{(b) $BA$} 
+\[
+BA = \begin{bmatrix} 4 & -3 \\ 1 & -2 \\ -2 & 0 \end{bmatrix} \begin{bmatrix} -1 & 3 \\ 4 & 2 \end{bmatrix} = \begin{bmatrix} 4(-1) - 3(4) & 4(3) - 3(2) \\ 1(-1) - 2(4) & 1(3) - 2(2) \\ -2(-1) + 0(4) & -2(3) + 0(2) \end{bmatrix} = \begin{bmatrix} -16 & 6 \\ -9 & -1 \\ 2 & -6 \end{bmatrix}
+\] 
+
+\paragraph{(c) $A'B'$} 
+Using the property $A'B' = (BA)'$, we transpose the result from (b): 
+\[
+A'B' = \begin{bmatrix} -16 & 6 \\ -9 & -1 \\ 2 & -6 \end{bmatrix}' = \begin{bmatrix} -16 & -9 & 2 \\ 6 & -1 & -6 \end{bmatrix}
+\] 
+
+\paragraph{(d) $C'B$} 
+\[
+C'B = \begin{bmatrix} 5 & -4 & 2 \end{bmatrix} \begin{bmatrix} 4 & -3 \\ 1 & -2 \\ -2 & 0 \end{bmatrix} = \begin{bmatrix} 5(4)-4(1)+2(-2) & 5(-3)-4(-2)+2(0) \end{bmatrix} = \begin{bmatrix} 12 & -7 \end{bmatrix}
+\] 
+
+\paragraph{(e) Is $AB$ defined?} 
+No. Matrix $A$ has dimensions $2 \times 2$ and matrix $B$ has dimensions $3 \times 2$. The number of columns in $A$ (2) does not equal the number of rows in $B$ (3). 
+
+\section*{Problem 2.4} 
+{(a) Prove $(A')^{-1} = (A^{-1})'$}\\
+
+
+By definition of an inverse, $AA^{-1} = I$. Taking the transpose of both sides gives $(AA^{-1})' = I'$.  
+Since $I' = I$ and the transpose of a product is the product of the transposes in reverse order, we have $(A^{-1})'A' = I$. 
+Multiplying both sides on the right by $(A')^{-1}$, we get $(A^{-1})' = (A')^{-1}$. \\
+
+{(b) Prove $(AB)^{-1} = B^{-1}A^{-1}$} 
+We evaluate the product of $AB$ and its proposed inverse: $(B^{-1}A^{-1})(AB) = B^{-1}(A^{-1}A)B$. 
+Since $A^{-1}A = I$, this simplifies to $B^{-1}IB = B^{-1}B = I$. 
+Since multiplying $AB$ by $B^{-1}A^{-1}$ yields the identity matrix, $(AB)^{-1} = B^{-1}A^{-1}$. \\
+
+\section*{Problem 2.8} 
+Given $A = \begin{bmatrix} 1 & 2 \\ 2 & -2 \end{bmatrix}$. 
+To find the eigenvalues, solve the characteristic equation $\det(A - \lambda I) = 0$: 
+\[
+\det \begin{bmatrix} 1-\lambda & 2 \\ 2 & -2-\lambda \end{bmatrix} = (1-\lambda)(-2-\lambda) - 4 = \lambda^2 + \lambda - 6 = (\lambda+3)(\lambda-2) = 0
+\]
+Thus, the eigenvalues are $\lambda_1 = 2$ and $\lambda_2 = -3$. 
+
+For $\lambda_1 = 2$:
+\[
+(A - 2I)x = \begin{bmatrix} -1 & 2 \\ 2 & -4 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \implies -x_1 + 2x_2 = 0 \implies x_1 = 2x_2
+\]
+The eigenvector is $v_1 = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$. Normalizing gives $e_1 = \frac{1}{\sqrt{5}} \begin{bmatrix} 2 \\ 1 \end{bmatrix}$. 
+
+For $\lambda_2 = -3$:
+\[
+(A + 3I)x = \begin{bmatrix} 4 & 2 \\ 2 & 1 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \implies 2x_1 + x_2 = 0 \implies x_2 = -2x_1
+\]
+The eigenvector is $v_2 = \begin{bmatrix} 1 \\ -2 \end{bmatrix}$. Normalizing gives $e_2 = \frac{1}{\sqrt{5}} \begin{bmatrix} 1 \\ -2 \end{bmatrix}$. 
+
+The spectral decomposition is $A = \lambda_1 e_1 e_1' + \lambda_2 e_2 e_2'$. 
+
+\section*{Problem 2.11} 
+By Definition 2A.24, expanding the determinant along the first row of the diagonal matrix $A$, we get $|A| = a_{11}|A_{11}| + 0 + \dots + 0$, where $A_{11}$ is the submatrix obtained by deleting the first row and first column. 
+Since $A_{11}$ is also a diagonal matrix, we can repeat this process: $|A_{11}| = a_{22}|A_{22}|$. 
+Continuing this process for all $p$ dimensions yields the product of the diagonal elements: $|A| = a_{11}a_{22}\dots a_{pp}$. 
+
+\section*{Problem 2.24} 
+Given $\Sigma = \begin{bmatrix} 4 & 0 & 0 \\ 0 & 9 & 0 \\ 0 & 0 & 1 \end{bmatrix}$. 
+
+\paragraph{(a) $\Sigma^{-1}$} 
+For a diagonal matrix, the inverse is the reciprocal of the diagonal elements: 
+\[ \Sigma^{-1} = \begin{bmatrix} 1/4 & 0 & 0 \\ 0 & 1/9 & 0 \\ 0 & 0 & 1 \end{bmatrix} \] 
+
+\paragraph{(b) Eigenvalues and eigenvectors of $\Sigma$} 
+Since $\Sigma$ is diagonal, its eigenvalues are the diagonal entries: $\lambda_1=4, \lambda_2=9, \lambda_3=1$. 
+The normalized eigenvectors are the standard basis vectors: $e_1=\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}$, $e_2=\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}$, $e_3=\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}$. 
+
+\paragraph{(c) Eigenvalues and eigenvectors of $\Sigma^{-1}$} 
+The eigenvalues of the inverse matrix are the reciprocals of the original eigenvalues: $\lambda_1=1/4, \lambda_2=1/9, \lambda_3=1$. The eigenvectors remain the same as in (b). 
+
+\section*{Problem 2.30} 
+Partitioning $X$ into $X^{(1)} = [X_1, X_2]'$ and $X^{(2)} = [X_3, X_4]'$. 
+We partition $\mu_X$ into $\mu^{(1)} = \begin{bmatrix} 4 \\ 3 \end{bmatrix}$ and $\mu^{(2)} = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$. 
+We partition $\Sigma_X$ into $\Sigma_{11} = \begin{bmatrix} 3 & 0 \\ 0 & 1 \end{bmatrix}$, $\Sigma_{22} = \begin{bmatrix} 9 & -2 \\ -2 & 4 \end{bmatrix}$, and $\Sigma_{12} = \begin{bmatrix} 2 & 2 \\ 1 & 0 \end{bmatrix}$. 
+
+\begin{itemize}
+    \item \textbf{(a)} $E(X^{(1)}) = \mu^{(1)} = \begin{bmatrix} 4 \\ 3 \end{bmatrix}$ 
+    \item \textbf{(b)} $E(AX^{(1)}) = A\mu^{(1)} = \begin{bmatrix} 1 & 2 \end{bmatrix} \begin{bmatrix} 4 \\ 3 \end{bmatrix} = 10$ 
+    \item \textbf{(c)} $Cov(X^{(1)}) = \Sigma_{11} = \begin{bmatrix} 3 & 0 \\ 0 & 1 \end{bmatrix}$ 
+    \item \textbf{(d)} $Cov(AX^{(1)}) = A\Sigma_{11}A' = \begin{bmatrix} 1 & 2 \end{bmatrix} \begin{bmatrix} 3 & 0 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ 2 \end{bmatrix} = 7$ 
+    \item \textbf{(e)} $E(X^{(2)}) = \mu^{(2)} = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$ 
+    \item \textbf{(f)} $E(BX^{(2)}) = B\mu^{(2)} = \begin{bmatrix} 1 & -2 \\ 2 & -1 \end{bmatrix} \begin{bmatrix} 2 \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ 3 \end{bmatrix}$ 
+    \item \textbf{(g)} $Cov(X^{(2)}) = \Sigma_{22} = \begin{bmatrix} 9 & -2 \\ -2 & 4 \end{bmatrix}$ 
+    \item \textbf{(h)} $Cov(BX^{(2)}) = B\Sigma_{22}B' = \begin{bmatrix} 1 & -2 \\ 2 & -1 \end{bmatrix} \begin{bmatrix} 9 & -2 \\ -2 & 4 \end{bmatrix} \begin{bmatrix} 1 & 2 \\ -2 & -1 \end{bmatrix} = \begin{bmatrix} 33 & 36 \\ 36 & 48 \end{bmatrix}$ 
+    \item \textbf{(i)} $Cov(X^{(1)}, X^{(2)}) = \Sigma_{12} = \begin{bmatrix} 2 & 2 \\ 1 & 0 \end{bmatrix}$ 
+    \item \textbf{(j)} $Cov(AX^{(1)}, BX^{(2)}) = A\Sigma_{12}B' = \begin{bmatrix} 1 & 2 \end{bmatrix} \begin{bmatrix} 2 & 2 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 1 & 2 \\ -2 & -1 \end{bmatrix} = \begin{bmatrix} 0 & 6 \end{bmatrix}$ 
+\end{itemize}
+
+\section*{Problem 2.41} 
+Given $\mu_X = \begin{bmatrix} 3 \\ 2 \\ -2 \\ 0 \end{bmatrix}$ and $\Sigma_X = 3I_{4 \times 4}$. 
+
+\paragraph{(a) Find $E(AX)$} 
+\[
+E(AX) = A\mu_X = \begin{bmatrix} 1 & -1 & 0 & 0 \\ 1 & 1 & -2 & 0 \\ 1 & 1 & 1 & -3 \end{bmatrix} \begin{bmatrix} 3 \\ 2 \\ -2 \\ 0 \end{bmatrix} = \begin{bmatrix} 1 \\ 9 \\ 3 \end{bmatrix}
+\] 
+
+\paragraph{(b) Find $Cov(AX)$} 
+\[
+Cov(AX) = A\Sigma_X A' = A(3I)A' = 3AA'
+\]
+\[
+3 \begin{bmatrix} 1 & -1 & 0 & 0 \\ 1 & 1 & -2 & 0 \\ 1 & 1 & 1 & -3 \end{bmatrix} \begin{bmatrix} 1 & 1 & 1 \\ -1 & 1 & 1 \\ 0 & -2 & 1 \\ 0 & 0 & -3 \end{bmatrix} = 3 \begin{bmatrix} 2 & 0 & 0 \\ 0 & 6 & 0 \\ 0 & 0 & 12 \end{bmatrix} = \begin{bmatrix} 6 & 0 & 0 \\ 0 & 18 & 0 \\ 0 & 0 & 36 \end{bmatrix}
+\] 
+
+\paragraph{(c) Which pairs of linear combinations have zero covariances?} 
+Since the resulting covariance matrix in (b) is diagonal, \textbf{all pairs} of linear combinations have zero covariance. 
+
+\end{document}
