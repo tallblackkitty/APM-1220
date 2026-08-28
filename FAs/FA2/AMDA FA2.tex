@@ -1,0 +1,116 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[margin=1in]{geometry}
+
+\title{APM1220: Applied Multivariate Data Analysis \\ FA 2} 
+\author{
+Andrei Ablian \\
+\and
+Maria Abad}
+
+\date{Aug 28, 2026}
+
+\begin{document}
+\maketitle
+
+\section*{Problem 3.1} 
+Given the data matrix $X = \begin{bmatrix} 9 & 1 \\ 5 & 3 \\ 1 & 2 \end{bmatrix}$.
+
+\paragraph{(a) Scatter plot in $p=2$ dimensions} \mbox{} \\
+The sample mean is $\bar{x} = \begin{bmatrix} (9+5+1)/3 \\ (1+3+2)/3 \end{bmatrix} = \begin{bmatrix} 5 \\ 2 \end{bmatrix}$. 
+(On a 2D Cartesian plane, the points are located at $(9,1)$, $(5,3)$, and $(1,2)$, with the sample mean plotted exactly in the center at $(5,2)$.)
+
+\paragraph{(b) $n=3$ dimensional representation} \mbox{} \\
+The deviation vectors are calculated as $y_i - \bar{x}_i \mathbf{1}$:
+\[
+d_1 = y_1 - \bar{x}_1 \mathbf{1} = \begin{bmatrix} 9 \\ 5 \\ 1 \end{bmatrix} - \begin{bmatrix} 5 \\ 5 \\ 5 \end{bmatrix} = \begin{bmatrix} 4 \\ 0 \\ -4 \end{bmatrix}
+\]
+\[
+d_2 = y_2 - \bar{x}_2 \mathbf{1} = \begin{bmatrix} 1 \\ 3 \\ 2 \end{bmatrix} - \begin{bmatrix} 2 \\ 2 \\ 2 \end{bmatrix} = \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}
+\]
+
+\paragraph{(c) Lengths, Cosine, and Relationships} \mbox{} \\
+Length of $d_1$: $L_1 = \sqrt{4^2 + 0^2 + (-4)^2} = \sqrt{32} = 4\sqrt{2}$.\\
+Length of $d_2$: $L_2 = \sqrt{(-1)^2 + 1^2 + 0^2} = \sqrt{2}$.\\
+Cosine of the angle $\theta$: 
+\[
+\cos(\theta) = \frac{d_1 \cdot d_2}{L_1 L_2} = \frac{4(-1) + 0(1) + (-4)(0)}{\sqrt{32}\sqrt{2}} = \frac{-4}{8} = -0.5
+\]
+\textbf{Relation to $S_n$ and $R$:} The squared lengths of the deviation vectors relate to the sample variances via $L_1^2 = n s_{11}$ and $L_2^2 = n s_{22}$. The cosine of the angle between them is exactly the sample correlation coefficient, $r_{12} = -0.5$.
+
+\section*{Problem 3.6} 
+Given $X = \begin{bmatrix} -1 & 3 & -2 \\ 2 & 4 & 2 \\ 5 & 2 & 3 \end{bmatrix}$.
+The mean vector is $\bar{x} = [2, 3, 1]'$.
+
+\paragraph{(a) Matrix of deviations} \mbox{} \\
+\[
+X_d = X - \mathbf{1}\bar{x}' = \begin{bmatrix} -1-2 & 3-3 & -2-1 \\ 2-2 & 4-3 & 2-1 \\ 5-2 & 2-3 & 3-1 \end{bmatrix} = \begin{bmatrix} -3 & 0 & -3 \\ 0 & 1 & 1 \\ 3 & -1 & 2 \end{bmatrix}
+\]
+This matrix is \textbf{not} of full rank. The sum of the rows in a mean-corrected deviation matrix is always the zero vector, which means the rows are linearly dependent. The maximum rank here is $n-1 = 2$.
+
+\paragraph{(b) $S$ and Generalized Sample Variance} \mbox{} \\
+\[
+S = \frac{1}{n-1} X_d' X_d = \frac{1}{2} \begin{bmatrix} -3 & 0 & 3 \\ 0 & 1 & -1 \\ -3 & 1 & 2 \end{bmatrix} \begin{bmatrix} -3 & 0 & -3 \\ 0 & 1 & 1 \\ 3 & -1 & 2 \end{bmatrix} = \frac{1}{2} \begin{bmatrix} 18 & -3 & 15 \\ -3 & 2 & -1 \\ 15 & -1 & 14 \end{bmatrix} = \begin{bmatrix} 9 & -1.5 & 7.5 \\ -1.5 & 1 & -0.5 \\ 7.5 & -0.5 & 7 \end{bmatrix}
+\]
+The generalized sample variance is $|S|$. Since the maximum rank of $X_d$ is 2 (less than $p=3$), $|S| = 0$. Geometrically, this means the $3$-dimensional volume spanned by the deviation vectors is zero because they are entirely restricted to a 2D plane.
+
+\paragraph{(c) Total Sample Variance} \mbox{} \\
+The total sample variance is the trace of $S$:
+\[
+\text{Total Variance} = tr(S) = s_{11} + s_{22} + s_{33} = 9 + 1 + 7 = 17
+\]
+
+\section*{Problem 3.9} 
+
+\paragraph{(a) Mean corrected data matrix} \mbox{} \\
+The mean vector is $\bar{x} = [16, 18, 34]'$.
+\[
+X_d = \begin{bmatrix} 12-16 & 17-18 & 29-34 \\ 18-16 & 20-18 & 30-34 \\ 14-16 & 16-18 & 30-34 \\ 20-16 & 18-18 & 35-34 \\ 16-16 & 19-18 & 35-34 \end{bmatrix} = \begin{bmatrix} -4 & -1 & -5 \\ 2 & 2 & 4 \\ -2 & -2 & -4 \\ 4 & 0 & 4 \\ 0 & 1 & 1 \end{bmatrix}
+\]
+The columns are linearly dependent. Let $a' = [1, 1, -1]$. Multiplying $X_d$ by $a$ yields the zero vector, confirming the linear dependence.
+
+\paragraph{(b) Sample Covariance Matrix $S$} \mbox{} \\
+\[
+S = \frac{1}{4} X_d' X_d = \frac{1}{4} \begin{bmatrix} -4 & 2 & -2 & 4 & 0 \\ -1 & 2 & -2 & 0 & 1 \\ -5 & 4 & -4 & 4 & 1 \end{bmatrix} \begin{bmatrix} -4 & -1 & -5 \\ 2 & 2 & 4 \\ -2 & -2 & -4 \\ 4 & 0 & 4 \\ 0 & 1 & 1 \end{bmatrix} = \begin{bmatrix} 10 & 3 & 13 \\ 3 & 2.5 & 5.5 \\ 13 & 5.5 & 18.5 \end{bmatrix}
+\]
+The generalized variance $|S| = 0$ because the columns are dependent. Verifying $Sa = 0$:
+\[
+S \begin{bmatrix} 1 \\ 1 \\ -1 \end{bmatrix} = \begin{bmatrix} 10(1) + 3(1) - 13(1) \\ 3(1) + 2.5(1) - 5.5(1) \\ 13(1) + 5.5(1) - 18.5(1) \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+\]
+
+\paragraph{(c) Verify third column} \mbox{} \\
+Looking at the original matrix $X$, the elements of the third column equal the sum of the first two: $12+17=29$, $18+20=30$, $14+16=30$, $20+18=35$, $16+19=35$. Thus, the linear combination $x_1 + x_2 - x_3 = 0$ holds, making $a = [1, 1, -1]'$.
+
+\section*{Problem 3.18} 
+Let total energy $T = x_1+x_2+x_3+x_4 = \mathbf{1}'x$.
+
+\paragraph{(a) Total energy consumption statistics} \mbox{} \\
+Sample Mean: $\bar{T} = \mathbf{1}'\bar{x} = 0.766 + 0.508 + 0.438 + 0.161 = 1.873$. \\
+Sample Variance: $S_T = \mathbf{1}'S\mathbf{1} = \text{Sum of all elements in } S = 1.76 + 1.398 + 0.511 + 0.245 = 3.914$.
+
+\paragraph{(b) Excess of petroleum over natural gas} \mbox{} \\
+Let $E = x_1 - x_2 = a'x$ where $a = [1, -1, 0, 0]'$. \\
+Sample Mean: $\bar{E} = a'\bar{x} = 0.766 - 0.508 = 0.258$. \\
+Sample Variance: $Var(E) = a'Sa = s_{11} + s_{22} - 2s_{12} = 0.856 + 0.568 - 2(0.635) = 0.154$. \\
+Sample Covariance with total: $Cov(E, T) = a'S\mathbf{1} = (\text{sum of row 1}) - (\text{sum of row 2}) = 1.760 - 1.398 = 0.362$.
+
+\section*{Problem 3.20} 
+
+\paragraph{(a) Summary Statistics Method} \mbox{} \\
+Computing summary statistics from the 25 observations:
+Mean of $x_1$: $\bar{x}_1 = 11.716$ \\
+Mean of $x_2$: $\bar{x}_2 = 16.976$ \\
+Sample variance of $x_1$: $s_{11} \approx 36.810$ \\
+Sample variance of $x_2$: $s_{22} \approx 75.712$ \\
+Sample covariance: $s_{12} \approx -12.937$ \\
+Sample mean of difference: $\bar{d} = \bar{x}_2 - \bar{x}_1 = 16.976 - 11.716 = 5.260$ \\
+Variance of difference: $s_{dd} = s_{11} + s_{22} - 2s_{12} = 36.810 + 75.712 - 2(-12.937) \approx 138.39$
+
+\paragraph{(b) Individual Values Method} \mbox{} \\
+Calculating the individual differences $d_j = x_{j2} - x_{j1}$ for all 25 rows (e.g., $13.7 - 12.5 = 1.2$, $16.5 - 14.5 = 2.0$, etc.).
+Sum of $d_j = 131.5 \implies$ Mean $\bar{d} = \frac{131.5}{25} = 5.260$. \\
+Sum of squares of $d_j = \sum d_j^2 = 4013.03$. \\
+Sample Variance $= \frac{1}{24} \left( 4013.03 - 25(5.260)^2 \right) = \frac{3321.34}{24} \approx 138.39$. \\
+As expected, calculating the variance from individual differences produces the exact same result as using the summary statistics from part a.
+
+\end{document}
